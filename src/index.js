@@ -1,23 +1,24 @@
-import { randLatitude, randLongitude } from "@ngneat/falso";
 import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
-import './styles.css';
 import './index.scss';
+import {getFlights} from './api.js'
 
-const lat = randLatitude();
-const lon = randLongitude();
-
-console.log('Setting map to:', lat, lon);
-
-const map = L.map('map').setView([lat, lon], 5);
+// Map setup
+const map = L.map('map').setView([0, 0], 1);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-L.circle([lat, lon], {
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.5,
-    radius: 500
-}).addTo(map);
+// Get data
+const getLatestFlightData = () => {
+    getFlights((data) => {
+        console.log(data);
+    }, (err) => console.error(err));
+}
+
+// Initial call
+getLatestFlightData();
+// Timer set up and clean up
+const timer = setInterval(() => getLatestFlightData(), 30000);
+window.onunload = () => clearInterval(timer);

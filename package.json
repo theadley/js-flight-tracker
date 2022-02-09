@@ -20,7 +20,6 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
-    "@ngneat/falso": "^2.22.0",
     "leaflet": "^1.7.1"
   }
 }
