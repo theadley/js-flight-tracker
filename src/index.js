@@ -84,7 +84,7 @@ const getLatestFlightData = () => {
         // If we have a selected flight, update it and make sure it's in the 100 we're tracking
         if (selectedFlight) {
             selectedFlight = data?.states?.find(f => f[0] === selectedFlight[0]);
-            ongoingFlights = [selectedFlight, ...data?.states?.filter(f => !!f[5] && !!f[6] && f[0] !== selectedFlight[0]).slice(0, 100)];
+            ongoingFlights = [selectedFlight, ...data?.states?.filter(f => !!f[5] && !!f[6] && f[0] !== selectedFlight[0]).slice(0, 99)];
         } else {
             // Reset with whatever the first 100 are
             ongoingFlights = data?.states?.filter(f => !!f[5] && !!f[6]).slice(0, 100);
